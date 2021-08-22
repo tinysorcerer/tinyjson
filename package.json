@@ -1,0 +1,9 @@
+{
+  "name": "tinyjson",
+  "type": "module",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/tinysorcerer/tinyjson",
+  "author": "Morado <roberto@morado.dev>",
+  "license": "MIT"
+}

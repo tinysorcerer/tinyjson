@@ -1,4 +1,4 @@
-# TINYJSON
+# <img src="https://raw.githubusercontent.com/tinysorcerer/100-pixel-icons/main/icons/medal.svg" width="20" />TinyJson
 
 State database without dependencies.
 

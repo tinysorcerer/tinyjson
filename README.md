@@ -1,27 +1,64 @@
 # TINYJSON
 
-State database
+State database without dependencies.
 
-## Instructions
+## How to
 
-Import module.
+### Setup
 
-```javascript
-import TinyJson from "./tinyjson/";
-```
-
-You can `push` an object, `pop` the last entry, and `update` values positionally.
+Import class
 
 ```javascript
-const db = new TinyJson();
-
-db.push({ id: "98c5a8b9-f2f2-43cc-b56e-91165cfbe62e", value: true });
-
-db.pop();
-
-db.update(0, { id: "null" });
-
-console.log(db.get); //  OUTPUT<[{id:"null"}]>
+import TinyJson from './path/to';
 ```
 
-with ❤️  and vanilla, no dependencies.
+Or
+
+```javascript
+import TinyJson from '@tinysorcerer/tinyjson';
+```
+
+### Use
+
+The class makes `push`, `pop`, and `update` available to interact with the object.
+
+```javascript
+const t = new TinyJson();
+
+t.push({ value: true });
+t.push({ value: false });
+t.push({ value: 'lorem' });
+/**
+ * Initial Value:
+ * [
+ *   { value: true, _id: "dyt-ezpzg" },
+ *   { value: false, _id: "gek-xyyxp" },
+ *   { value: "lorem", _id: "eei-vfsmi" }
+ * ]
+ */
+
+t.pop('gek-xyyxp');
+/**
+ * Remove 2nd Entry:
+ * [
+ *   { value: true, _id: "dyt-ezpzg" },
+ *   { value: "lorem", _id: "eei-vfsmi" }
+ * ]
+ */
+
+t.update('eei-vfsmi', { value: false });
+/**
+ * Update Last Entry:
+ * [
+ *   { value: true, _id: "dyt-ezpzg" },
+ *   { value: false, _id: "eei-vfsmi" }
+ * ]
+ */
+
+console.log(t.get);
+/**
+ * Final Value: [{"value":true,"_id":"dyt-ezpzg"},{"value":false,"_id":"eei-vfsmi"}]
+ */
+```
+
+> `yarn test` to see this in action.

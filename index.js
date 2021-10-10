@@ -1,42 +1,76 @@
-import { validatePush, validateUpdate } from "./utils/validations.js";
+import { validatePush, random } from './utils/mod.js';
 
+/**
+ * Creates _db[]_ as an empty array.
+ */
 export default class TinyJSON {
   constructor() {
-    this.data = [];
-    this.push = (obj) => this.data.push(obj);
-    this.pop = () => this.data.pop();
-    this.update = (i, obj) => (this.data[i] = obj);
+    this.db = [];
   }
 
+  /**
+   * Validate `payload` and push to _db[]_.
+   *
+   * @param {Object} payload
+   */
   push(payload) {
     try {
       if (validatePush(payload)) {
-        this.push(payload);
+        payload._id = random();
+        this.db.push(payload);
       } else {
-        throw new TypeError("Payload must be an object");
+        throw new TypeError('Payload must be an object');
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
-  update(index, payload) {
-    try {
-      if (validateUpdate(this.data[index], payload)) {
-        this.update(index, payload);
+  /**
+   * Find object with matching `id`, loop through _db[]_ and reconstruct with `payload`.
+   *
+   * When `strict`, update only contained keys, otherwise allow new entries.
+   *
+   * @param {String} id
+   * @param {Object} payload
+   * @param {Boolean} strict
+   */
+  update(id, payload, strict = true) {
+    const obj = this.db.find((i) => i._id === id);
+
+    for (const key in payload) {
+      if (validatePush(obj[key])) {
+        update(obj[key], payload[key]);
       } else {
-        throw new TypeError("Payload corrupted");
+        if (strict) {
+          if (obj.hasOwnProperty(key)) {
+            obj[key] = payload[key];
+          }
+        } else {
+          obj[key] = payload[key];
+        }
       }
-    } catch (e) {
-      console.log(e);
     }
   }
 
-  pop() {
-    this.pop();
+  /**
+   * When `id`, remove matching object; otherwise, remove last entry.
+   *
+   * @param {String} id
+   */
+  pop(id) {
+    if (id) {
+      this.db = this.db.filter((i) => i._id !== id);
+      return;
+    }
+
+    this.db.pop();
   }
 
+  /**
+   * Return **stringified** _db[]_
+   */
   get get() {
-    return this.data;
+    return JSON.stringify(this.db);
   }
 }

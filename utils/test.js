@@ -26,6 +26,9 @@ console.log('\nUpdate Last Entry:');
 t.update(t.db[1]._id, { value: false });
 console.log(t.db);
 
+console.log('\nFind 1st Entry:');
+console.log(t.find(t.db[0]._id));
+
 console.warn('\nFinal Value: ', t.get);
 
 console.log('------------------------------------------------');

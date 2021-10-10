@@ -55,6 +55,14 @@ t.update('eei-vfsmi', { value: false });
  * ]
  */
 
+console.log(t.find('dyt-ezpzg'));
+/**
+ * Find 1st Entry:
+ * [
+ *   { value: true, _id: 'dyt-ezpzg' }
+ * ]
+ */
+
 console.log(t.get);
 /**
  * Final Value: [{"value":true,"_id":"dyt-ezpzg"},{"value":false,"_id":"eei-vfsmi"}]

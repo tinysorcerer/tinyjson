@@ -54,6 +54,14 @@ export default class TinyJSON {
   }
 
   /**
+   * Find entry matching `id`
+   * @param {String} id
+   */
+  find(id) {
+    return this.db.find((i) => i._id === id);
+  }
+
+  /**
    * When `id`, remove matching object; otherwise, remove last entry.
    *
    * @param {String} id

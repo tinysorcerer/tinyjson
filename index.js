@@ -27,7 +27,7 @@ export default class TinyJSON {
   }
 
   /**
-   * Find object with matching `id`, loop through _db[]_ and reconstruct with `payload`.
+   * Find entry with matching `id`, loop through _db[]_ and reconstruct with `payload`.
    *
    * When `strict`, update only contained keys, otherwise allow new entries.
    *
@@ -76,9 +76,9 @@ export default class TinyJSON {
   }
 
   /**
-   * Return **stringified** _db[]_
+   * Return _db[]_
    */
   get get() {
-    return JSON.stringify(this.db);
+    return this.db;
   }
 }
